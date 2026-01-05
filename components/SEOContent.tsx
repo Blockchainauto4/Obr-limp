@@ -24,6 +24,14 @@ const SEOContent: React.FC<{ location: UserLocation }> = ({ location }) => {
       desc: `Controle de pragas certificado exatamente na região de ${city}. Dedetização, desinsetização e controle de roedores imediato.`
     },
     {
+      id: 'instalador',
+      title: 'Instalador Técnico aqui Perto',
+      icon: '🛠️',
+      color: 'bg-orange-600',
+      textColor: 'text-orange-600',
+      desc: `Instaladores de box de vidro, redes de proteção, persianas e ar condicionado em ${city}. Montagem profissional e segura.`
+    },
+    {
       id: 'cacamba',
       title: 'Caçamba de Entulho aqui Perto',
       icon: '🚚',
@@ -46,25 +54,25 @@ const SEOContent: React.FC<{ location: UserLocation }> = ({ location }) => {
             Encontre <span className="italic text-blue-500 underline decoration-white underline-offset-8">Perto de Mim</span> <br className="hidden md:block"/> em {city}
           </h3>
           <p className="mt-8 text-slate-400 max-w-2xl mx-auto font-medium text-lg">
-            Conectamos você aos profissionais de manutenção e finalização de obras mais próximos da sua localização atual em São Paulo.
+            Conectamos você aos profissionais de manutenção, finalização e instalações técnicas mais próximos da sua localização atual em São Paulo.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
           {pillars.map((p) => (
-            <div key={p.id} className="group bg-white/5 border border-white/10 p-10 rounded-[3rem] hover:bg-white hover:border-white transition-all duration-500 shadow-2xl">
-              <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:bg-slate-900 group-hover:scale-110 transition-all">
+            <div key={p.id} className="group bg-white/5 border border-white/10 p-8 rounded-[3rem] hover:bg-white hover:border-white transition-all duration-500 shadow-2xl flex flex-col">
+              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-slate-900 group-hover:scale-110 transition-all">
                 {p.icon}
               </div>
-              <h4 className="text-xl font-black text-white group-hover:text-slate-900 uppercase tracking-tight mb-4 leading-tight">
+              <h4 className="text-lg font-black text-white group-hover:text-slate-900 uppercase tracking-tight mb-4 leading-tight">
                 {p.title}
               </h4>
-              <p className="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed mb-8 font-medium">
+              <p className="text-slate-400 group-hover:text-slate-600 text-[11px] leading-relaxed mb-6 font-medium flex-grow">
                 {p.desc}
               </p>
               <button 
                 onClick={() => sendWhatsApp(`Gostaria de orçamento para ${p.title} em ${city}`)}
-                className={`w-full px-6 py-4 ${p.color} text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl group-hover:shadow-none transition-all flex items-center justify-center gap-2`}
+                className={`w-full px-4 py-3 ${p.color} text-white font-black uppercase tracking-widest text-[9px] rounded-xl shadow-xl group-hover:shadow-none transition-all flex items-center justify-center gap-2`}
               >
                 Chamar no WhatsApp Próximo
               </button>
@@ -85,12 +93,12 @@ const SEOContent: React.FC<{ location: UserLocation }> = ({ location }) => {
                   Buscar por <span className="font-bold text-slate-900 underline decoration-blue-200">{spec} perto de mim em {city} SP</span> exige confiança e rapidez. O domínio <span className="text-blue-600 font-bold">obralimpa.sp</span> garante que você está falando com uma central inteligente que mapeia a logística de São Paulo em tempo real.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  Diferente de empresas generalistas, nós focamos na <span className="font-bold">hiper-localização</span>. Seja em Moema, Tatuapé ou Alphaville, nossas equipes de <span className="font-bold text-slate-900">limpeza técnica e dedetização</span> já conhecem as particularidades da sua região em SP, garantindo que o serviço seja feito com o menor deslocamento e maior eficiência.
+                  Diferente de empresas generalistas, nós focamos na <span className="font-bold">hiper-localização</span>. Seja para um <span className="font-bold">instalador de box em Moema</span> ou uma <span className="font-bold">limpeza pós-obra no Tatuapé</span>, nossas equipes já conhecem as particularidades da sua região em SP.
                 </p>
               </div>
               
               <div className="mt-12 flex flex-wrap gap-4">
-                {['Empresa Registrada', 'Equipes Seguradas', 'Laudo Técnico SP', 'Perto de Mim', 'Orçamento pelo Whats'].map(tag => (
+                {['Empresa Registrada', 'Instaladores Certificados', 'Laudo Técnico SP', 'Perto de Mim', 'Orçamento pelo Whats'].map(tag => (
                   <div key={tag} className="px-6 py-3 bg-slate-100 text-slate-900 font-black uppercase tracking-widest text-[10px] rounded-2xl border border-slate-200">
                     {tag}
                   </div>
@@ -100,12 +108,12 @@ const SEOContent: React.FC<{ location: UserLocation }> = ({ location }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
-                { l: 'Limpeza Moema aqui perto', s: 'Ativo' },
-                { l: 'Dedetização Itaim próxima', s: 'Ativo' },
-                { l: 'Caçamba Pinheiros agora', s: 'Ativo' },
-                { l: 'Limpeza Santana em SP', s: 'Ativo' },
-                { l: 'Dedetização Tatuapé perto de mim', s: 'Ativo' },
-                { l: 'Caçamba Butantã disponível', s: 'Ativo' }
+                { l: 'Instalador Box Moema agora', s: 'Ativo' },
+                { l: 'Montador Box Tatuapé perto', s: 'Ativo' },
+                { l: 'Redes de Proteção Pinheiros', s: 'Ativo' },
+                { l: 'Instalação Varal Santana', s: 'Ativo' },
+                { l: 'Ar Condicionado Butantã', s: 'Ativo' },
+                { l: 'Papel de Parede Jardins', s: 'Ativo' }
               ].map((item, i) => (
                 <div key={i} className="p-8 bg-slate-50 border border-slate-200 rounded-[2.5rem] hover:border-blue-500 transition-colors shadow-sm group">
                   <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2 group-hover:animate-pulse">{item.s}</p>
