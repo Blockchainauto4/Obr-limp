@@ -30,6 +30,10 @@ export const CITIES_BY_STATE: Record<string, string[]> = {
 
 export const SPECIALTIES = [
   'Limpeza Pós-Obra',
+  'Box de Vidro', // Mapeado do Search Console
+  'Montagem de Móveis', // Mapeado do Search Console
+  'Pintura Residencial', // Mapeado do Search Console
+  'Limpeza de Piscina', // Mapeado do Search Console
   'Dedetização e Controle de Pragas',
   'Transporte de Entulho e Caçambas',
   'Instalador de Box de Vidro',

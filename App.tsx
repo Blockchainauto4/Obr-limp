@@ -13,7 +13,7 @@ import AdminAuthModal from './components/AdminAuthModal';
 import ProcessingDashboard from './components/ProcessingDashboard';
 import LegalModal from './components/LegalModal';
 import CookieConsent from './components/CookieConsent';
-import { UserLocation } from './types';
+import { UserLocation, SPECIALTIES } from './types';
 
 const App: React.FC = () => {
   const [location, setLocation] = useState<UserLocation>({ 
@@ -38,11 +38,28 @@ const App: React.FC = () => {
   const handleRouting = useCallback(() => {
     const path = window.location.pathname;
     const parts = path.split('/').filter(p => p);
+    
+    // Suporte para URLs legadas: /servicos/limpeza-pos-obra
+    if (parts[0] === 'servico' || parts[0] === 'servicos') {
+      const specialtySlug = parts[1] || 'limpeza-pos-obra';
+      const specialtyName = specialtySlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      
+      // Tenta encontrar a especialidade correta ou usa a original formatada
+      const matchedSpecialty = SPECIALTIES.find(s => 
+        s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === 
+        specialtySlug.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      ) || specialtyName;
+
+      setLocation({ city: 'São Paulo', state: 'SP', specialty: matchedSpecialty });
+      return;
+    }
+
+    // Suporte para nova estrutura: /atendimento/sp/moema/limpeza-pos-obra
     if (parts[0] === 'atendimento' && parts.length >= 2) {
       const stateParam = parts[1].toUpperCase();
-      const cityParam = parts[2] ? parts[2].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : '';
+      const cityParam = parts[2] ? parts[2].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'São Paulo';
       const specialtyParam = parts[3] ? parts[3].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Limpeza Pós-Obra';
-      setLocation({ city: cityParam || 'São Paulo', state: stateParam, specialty: specialtyParam });
+      setLocation({ city: cityParam, state: stateParam, specialty: specialtyParam });
     }
   }, []);
 
@@ -70,8 +87,11 @@ const App: React.FC = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
+    
     const slugCity = city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ /g, '-');
     const slugSpec = spec.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ /g, '-');
+    
+    // Define a nova URL como canônica para consolidar autoridade
     canonical.setAttribute('href', `https://obralimpa.sp/atendimento/sp/${slugCity}/${slugSpec}`);
     
     let description = document.querySelector('meta[name="description"]');
@@ -125,12 +145,11 @@ const App: React.FC = () => {
         )}
         <button 
           onClick={() => setIsChatOpen(!isChatOpen)}
-          aria-label={isChatOpen ? "Fechar assistente" : "Abrir assistente perto de mim"}
           className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 active:scale-95 z-[101] border-4 border-white ${
             isChatOpen ? 'bg-slate-900 text-white' : 'bg-blue-600 text-white shadow-blue-500/40'
           }`}
         >
-          <span className="text-2xl" aria-hidden="true">{isChatOpen ? '✕' : '💬'}</span>
+          <span className="text-2xl">{isChatOpen ? '✕' : '💬'}</span>
         </button>
       </div>
 
@@ -141,7 +160,7 @@ const App: React.FC = () => {
         onClick={() => isAuthorized ? setIsAdminOpen(true) : setIsAuthOpen(true)}
         className={`fixed bottom-6 left-6 w-14 h-14 bg-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-orange-600 hover:scale-110 active:scale-95 transition-all z-[60] border-2 border-white/10 ${isAuthorized ? 'opacity-100' : 'opacity-20'}`}
       >
-        <span className="text-2xl" aria-hidden="true">⚙️</span>
+        <span className="text-2xl">⚙️</span>
       </button>
 
       {legalModal.open && <LegalModal title={legalModal.title} type={legalModal.type} onClose={() => setLegalModal({ ...legalModal, open: false })} />}
