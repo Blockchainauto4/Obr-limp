@@ -1,0 +1,27 @@
+{
+  "redirects": [
+    {
+      "source": "/tag/(.*)",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/atendimento/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!api/|robots\\.txt|sitemap\\.xml|assets/|favicon\\.ico|.*\\..*$).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

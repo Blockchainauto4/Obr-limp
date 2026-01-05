@@ -1,0 +1,9 @@
+{
+  "name": "OBRA LIMPA SP",
+  "description": "Plataforma Master de Limpeza Pós-Obra, Dedetização e Transporte de Entulho em São Paulo. SEO Local focado em bairros de SP.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera",
+    "microphone"
+  ]
+}
